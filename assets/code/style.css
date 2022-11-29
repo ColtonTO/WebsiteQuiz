@@ -1,0 +1,75 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+:root {
+    --hue-neutral: rgb(160, 0, 255);
+    --hue-background: rgb(255, 255, 255);
+    --hue-correct: rgb(0, 255, 0);
+    --hue-wrong: rgb(255, 0, 0);
+}
+
+body {
+    --hue: var(--hue-neutral);
+    padding: 0;
+    margin: 0;
+    display: flex; 
+    width: 100vw;
+    height: 100vh;
+    justify-content: center; 
+    align-items: center; 
+    background-color: var(--hue-background);
+}
+
+.container {
+    width: 800px;
+    max-width: 80%; 
+    background-color: var(--hue-background);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+}
+
+.info-header {
+    justify-content: center;
+    display: flex;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    gap: 10px; 
+    margin: 20px 0;
+}
+
+.btn {
+    --hue: var(--hue-neutral);
+    background-color: var(--hue-neutral);
+    border: 10px solid hsl(var(--hue-neutral));
+    border-radius: 5px; 
+    padding: 5px 10px; 
+    outline: none; 
+}
+
+.btn:hover {
+    border-color: black;
+}
+
+.start-btn {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    padding: 10px 20px; 
+}
+
+.controls {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.hide {
+    display: none;
+}
