@@ -1,42 +1,64 @@
+/* Global Declarations */
+
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
+/* Colors */
 
 :root {
     --hue-neutral: rgb(160, 0, 255);
     --hue-background: rgb(255, 255, 255);
-    --hue-correct: rgb(0, 255, 0);
-    --hue-wrong: rgb(255, 0, 0);
 }
 
 body {
     --hue: var(--hue-neutral);
     padding: 0;
     margin: 0;
-    display: flex; 
+    /* display: flex;  */
     width: 100vw;
     height: 100vh;
-    justify-content: center; 
-    align-items: center; 
+    /* justify-content: center; 
+    align-items: center;  */
     background-color: var(--hue-background);
 }
 
+/* Main Container Section */
+
 .container {
-    width: 800px;
+    width: 50%;
     max-width: 80%; 
     background-color: var(--hue-background);
-    border-radius: 5px;
     padding: 10px;
-    box-shadow: 0 0 10px 2px;
+    margin: 0 auto;
 }
 
 .info-header {
     justify-content: center;
     display: flex;
     padding: 15px;
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: 24px;
 }
+
+.info-h1 {
+    justify-content: center; 
+    display: flex;
+    font-weight: bold;
+    padding: 3px;
+}
+
+/* Outer Container Section */
+
+.outer-container {
+    padding: 10px;
+    height: 100vh;
+}
+
+/* Buttons */
 
 .btn-grid {
     display: grid;
@@ -55,13 +77,17 @@ body {
 }
 
 .btn:hover {
-    border-color: black;
+    /* border-color: black;
+    border-style: solid; */
+    opacity: 80%;
+    cursor: pointer;
 }
 
 .start-btn {
     font-size: 1.5rem; 
     font-weight: bold; 
     padding: 10px 20px; 
+    margin: 10px;
 }
 
 .controls {
@@ -70,6 +96,22 @@ body {
     align-items: center; 
 }
 
-.hide {
-    display: none;
+/* Top Bar */
+
+.top-bar p {
+    float: right;
 }
+
+.top-bar button {
+    background-color: var(--hue-background);
+    border-style: none;
+    color: var(--hue-neutral)
+}
+
+.top-bar button:hover {
+    cursor: pointer;
+}
+
+/* .hide {
+    display: none;
+} */
