@@ -17,7 +17,8 @@
     <!-- Top Bar Section -->
     <div class="top-bar">
         <button>View Highscores</button>
-        <p> Timer : 00:00 </p>
+        <p class="timer-count">00:00 </p>
+        <p>Timer: &nbsp;</p>
     </div>
     <div class = "container"> 
 
@@ -26,23 +27,48 @@
             <div class = "info-header"> Hello! Welcome to the Quiz!</div>
             <div class = "info-h1">Try to answer the following coding-related questions within the time limit. </div>
             <div class = "info-h1">Keep in mind that wrong answers will penalize your time! </div>
-            <div></div>
+            <div class = "info-h1">Press "Start" to start the quiz!</div>
             </div>  
+            <div class="controls">
+                <button id="start-btn" class="start-btn btn ">Start </button>
+            </div>
 
             <!-- Quiz Section --> 
-        <main id="question-container" class="hide">
-            <div id="question">Question </div>
-            <div id="answer-buttons" class="btn-grid"> 
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 2</button>
-                <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
+        <main id="question-container">
+            <div id="question" class="hide" ></div>
+            <div id="answer-buttons" class="btn-grid, hide"> 
             </div>
-        </main>
-        <div class="controls">
-            <button id="start-btn" class="start-btn btn ">Start </button>
+            <!-- Quiz End Section -->
+        <div id="quiz-finish" class="hide">
+            <div class="container-end">
+                <div id="score-banner">
+                  <h2>Quiz Finished!</h2>
+                </div>
+                <form id="initials-form" class="initials"> 
+                    <p> Enter Initials 
+                  <input type="text" name="initials" id="initials" class="text-input" />
+                  <button class="btn startend" id="submit-score" type="submit">Submit</button> </p>
+                </form>
+            </div>
         </div>
     </div>
+            <!-- Highscore Screen-->
+            <div id="high-score-container" class="hide">
+            <section class="highscores-screen">
+                <h2 class="high-score">Highscores:</h2>
+                <ol id="high-score-list" class="score-list"></ol>
+                <button class="btn" id="go-back">Go Back</button>
+                <button class="btn" id="clear-high-scores">Clear Highscores</button>
+        </section>
+        </div>
+        </main>
+    </div>
+    </div>
+    <div class="hide" id="correct">
+        <h2>Correct!</h2>
+    </div>
+    <div class="hide" id="wrong">
+        <h2>Wrong!</h2>
     </div>
 </body>
 </html>

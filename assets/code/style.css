@@ -112,6 +112,23 @@ body {
     cursor: pointer;
 }
 
-/* .hide {
+.hide {
     display: none;
-} */
+}
+
+/* Quiz Section */
+
+.quiz-finish {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+/* Highscores Screen */
+
+.highscores-screen {
+    display: block;
+
+}
