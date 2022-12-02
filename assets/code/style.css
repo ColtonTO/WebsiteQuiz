@@ -77,10 +77,14 @@ body {
 }
 
 .btn:hover {
-    /* border-color: black;
-    border-style: solid; */
+    box-shadow: 0 2px grey;
+    border-radius: 10px;
     opacity: 80%;
     cursor: pointer;
+}
+
+.btn:focus {
+    outline: none;
 }
 
 .start-btn {
@@ -94,6 +98,11 @@ body {
     display: flex; 
     justify-content: center; 
     align-items: center; 
+}
+
+.startend {
+    width: 25%;
+    margin-top: 10px;
 }
 
 /* Top Bar */
@@ -130,5 +139,12 @@ body {
 
 .highscores-screen {
     display: block;
+}
 
+ol {
+    list-style-type: number;
+}
+
+li {
+    font-size: 4vw;
 }
