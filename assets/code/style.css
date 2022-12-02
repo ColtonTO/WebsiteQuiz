@@ -30,32 +30,28 @@ body {
 
 .container {
     width: 50%;
-    max-width: 80%; 
+    max-width: 50%; 
     background-color: var(--hue-background);
     padding: 10px;
-    margin: 0 auto;
+    margin: auto;
+    flex-direction: column;
 }
 
-.info-header {
+h1 {
     justify-content: center;
     display: flex;
-    padding: 15px;
+    padding: 10px;
     font-weight: bolder;
     font-size: 24px;
+    text-align: center;
 }
 
-.info-h1 {
+.container p {
     justify-content: center; 
     display: flex;
     font-weight: bold;
-    padding: 3px;
-}
-
-/* Outer Container Section */
-
-.outer-container {
-    padding: 10px;
-    height: 100vh;
+    padding: 4px;
+    text-align: center;
 }
 
 /* Buttons */
@@ -123,6 +119,10 @@ body {
 
 .hide {
     display: none;
+}
+
+.show {
+    display: flex;
 }
 
 /* Quiz Section */

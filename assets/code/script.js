@@ -1,24 +1,29 @@
-var timerElement = document.querySelector(".timer-count");
-var startBtn = document.querySelector(".start-btn");
-var containerQuestionEl = document.getElementById(".question-container");
-var outerContainerEl  = document.getElementById(".outer-container");
+var containerQuestionEl = document.getElementById("question-container");
 var questionEl = document.getElementById(".question");
 var answerButtonEl = document.getElementById(".answer-buttons");
 var submitScoreEl = document.getElementById(".submit-score");
 var highScoreContainerEl  = document.getElementById(".high-score-container");
 var highScoreListEl = document.getElementById(".high-score-list");
+var containerStartEl = document.getElementById("starting-container");
+var containerEndEl = document.getElementById("end-container")
+var containerScoreEl = document.getElementById("score-banner")
+var formInitials = document.getElementById("initials-form")
 var correctEl = document.getElementById(".correct")
 var wrongEl = document.getElementById(".wrong");
+var containerStartEl 
 
 //buttons
 var btnClearHighScoreEl = document.querySelector("#clear-high-scores");
 var btnGoBackEl = document.querySelector("#go-back")
 var viewHighScores = document.querySelector('#view-high-scores')
+var startBtn = document.querySelector("#start-btn");
 
+var timerEl = document.querySelector("#timer")
 var score = 0;
 var gameOver
 var timer;
-var timerCount = 25;
+var timerCount;
+timerEl.innerText = 0;
 
 //High Score
 var HighScores = [];
@@ -58,20 +63,33 @@ var questions = [
       choices: [{choice: '1. Application programming interface'}, {choice: '2. Application professinal introduction'}, {choice: '3. Apprentice programmer individual'}, {choice: '4. Ambitious pedestrian ideology'}]
     },
 ];
-function startGame() {
-    startBtn.disabled = true;
-    startTimer()
-}
 
-function startTimer() {
-    timer = setInterval(function() {
-    timerCount--;
-    timerElement.textContent = timerCount;
-    if (timerCount === 0) {
-        clearInterval(timer);
-        return alert("Sorry! You lost!")
+var startGame = function() {
+    containerStartEl.classList.add('hide');
+    containerStartEl.classList.remove('show');
+    containerQuestionEl.classList.remove('hide');
+    containerQuestionEl.classList.add('show');
+    arrayShuffledQuestions = questions.sort(() => Math.random() - 0.5)
+    setTime()
+  }
+
+var setTime = function () {
+    timeleft = 30;
+
+var timercheck = setInterval(function() {
+    timerEl.innerText = timeleft;
+    timeleft--;
+
+    if (gameOver) {
+        clearInterval(timercheck)
     }
-}, 1000);
-}
+   
+    if (timeleft < 0) {
+        //showScore()
+        timerEl.innerText = 0
+        clearInterval(timercheck)
+    }
 
+    }, 1000)
+}
 startBtn.addEventListener("click", startGame);
