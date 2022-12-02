@@ -1,15 +1,15 @@
 var containerQuestionEl = document.getElementById("question-container");
-var questionEl = document.getElementById(".question");
-var answerButtonEl = document.getElementById(".answer-buttons");
-var submitScoreEl = document.getElementById(".submit-score");
-var highScoreContainerEl  = document.getElementById(".high-score-container");
-var highScoreListEl = document.getElementById(".high-score-list");
+var questionEl = document.getElementById("question");
+var answerButtonEl = document.getElementById("answer-buttons");
+var submitScoreEl = document.getElementById("submit-score");
+var highScoreContainerEl  = document.getElementById("high-score-container");
+var highScoreListEl = document.getElementById("high-score-list");
 var containerStartEl = document.getElementById("starting-container");
 var containerEndEl = document.getElementById("end-container")
 var containerScoreEl = document.getElementById("score-banner")
 var formInitials = document.getElementById("initials-form")
-var correctEl = document.getElementById(".correct")
-var wrongEl = document.getElementById(".wrong");
+var correctEl = document.getElementById("correct")
+var wrongEl = document.getElementById("wrong");
 var containerStartEl 
 
 //buttons
@@ -29,7 +29,7 @@ timerEl.innerText = 0;
 var HighScores = [];
 
 //question shuffle
-var ArrayShuffledQuestions
+var arrayShuffledQuestions
 var QuestionIndex = 0
 
 //quiz questions
@@ -46,7 +46,7 @@ var questions = [
       a: '1. Document Object Model',
       choices: [{choice: '1. Document Object Model'}, {choice: '2. Document Obstruction Module'}, {choice: '3. Do Objection Map'}, {choice: '4. Document Occupation Management'}]
     },
-    { q: 'Who invented JavaScript',
+    { q: 'Who invented JavaScript?',
       a: '2. Brendan Eich',
       choices: [{choice: '1. Steve Jobs'}, {choice: '2. Brendan Eich'}, {choice: '3. Bill Gates'}, {choice: '4. James Gosling'}]
     },
@@ -63,15 +63,6 @@ var questions = [
       choices: [{choice: '1. Application programming interface'}, {choice: '2. Application professinal introduction'}, {choice: '3. Apprentice programmer individual'}, {choice: '4. Ambitious pedestrian ideology'}]
     },
 ];
-
-var startGame = function() {
-    containerStartEl.classList.add('hide');
-    containerStartEl.classList.remove('show');
-    containerQuestionEl.classList.remove('hide');
-    containerQuestionEl.classList.add('show');
-    arrayShuffledQuestions = questions.sort(() => Math.random() - 0.5)
-    setTime()
-  }
 
 var setTime = function () {
     timeleft = 30;
@@ -91,5 +82,62 @@ var timercheck = setInterval(function() {
     }
 
     }, 1000)
+}
+
+var startGame = function() {
+    containerStartEl.classList.add('hide');
+    containerStartEl.classList.remove('show');
+    containerQuestionEl.classList.remove('hide');
+    containerQuestionEl.classList.add('show');
+    arrayShuffledQuestions = questions.sort(() => Math.random() - 0.5)
+    setTime()
+    setQuestion()
+  }
+
+var setQuestion = function() {
+    resetAnswers()
+    displayQuestion(arrayShuffledQuestions[QuestionIndex])
+}
+
+var resetAnswers = function() {
+    while (answerButtonEl.firstChild) {
+        answerButtonEl.removeChild(answerButtonEl.firstChild)
+    };
+};
+
+var displayQuestion = function(index) {
+    questionEl.innerText = index.q
+    for (var i = 0; i < index.choices.length; i++) {
+        var answerbutton = document.createElement('button')
+        answerbutton.innerText = index.choices[i].choice
+        answerbutton.classList.add('btn')
+        answerbutton.classList.add('answerbtn')
+        answerbutton.addEventListener("click", answerCheck)
+        answerButtonEl.appendChild(answerbutton)
+        }
+    };
+
+
+    var answerCheck = function(event) {
+        var selectedanswer = event.target
+            if (arrayShuffledQuestions[QuestionIndex].a === selectedanswer.innerText){
+                answerCorrect()
+                score = score + 7
+            }
+
+            else {
+              answerWrong()
+              score = score - 1;
+              timeleft = timeleft - 3;
+          };
+        //
+        QuestionIndex++
+        if  (arrayShuffledQuestions.length > QuestionIndex + 1) {
+            setQuestion()
+        }   
+        else {
+           gameover = "true";
+           showScore();
+            }
 }
 startBtn.addEventListener("click", startGame);
