@@ -117,6 +117,24 @@ var displayQuestion = function(index) {
         }
     };
 
+    //display correct! on screen
+    var answerCorrect = function() {
+        if (correctEl.className = "hide") {
+            correctEl.classList.remove("hide")
+            correctEl.classList.add("banner")
+            wrongEl.classList.remove("banner")
+            wrongEl.classList.add("hide")
+            }
+        }  
+    //display wrong! on screen
+    var answerWrong = function() {
+        if (wrongEl.className = "hide") {
+            wrongEl.classList.remove("hide")
+            wrongEl.classList.add("banner")
+            correctEl.classList.remove("banner")
+            correctEl.classList.add("hide")
+        }
+    }
 
     var answerCheck = function(event) {
         var selectedanswer = event.target
@@ -140,4 +158,15 @@ var displayQuestion = function(index) {
            showScore();
             }
 }
+
+var showScore = function () {
+    containerQuestionEl.classList.add("hide");
+    containerEndEl.classList.remove("hide");
+    containerEndEl.classList.add("show");
+
+    var scoreDisplay = document.createElement("p");
+    scoreDisplay.innerText = ("Your final score is " + score + "!");
+    containerScoreEl.appendChild(scoreDisplay);
+}       
+
 startBtn.addEventListener("click", startGame);
