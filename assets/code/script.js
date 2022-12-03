@@ -4,6 +4,7 @@ var answerButtonEl = document.getElementById("answer-buttons");
 var submitScoreEl = document.getElementById("submit-score");
 var highScoreContainerEl  = document.getElementById("high-score-container");
 var highScoreListEl = document.getElementById("high-score-list");
+var viewHighScoresEl = document.getElementById("view-high-scores")
 var containerStartEl = document.getElementById("starting-container");
 var containerEndEl = document.getElementById("end-container")
 var containerScoreEl = document.getElementById("score-banner")
@@ -63,6 +64,28 @@ var questions = [
       choices: [{choice: '1. Application programming interface'}, {choice: '2. Application professinal introduction'}, {choice: '3. Apprentice programmer individual'}, {choice: '4. Ambitious pedestrian ideology'}]
     },
 ];
+// renders when hitting back button
+var renderStartPage = function () {
+    highScoreContainerEl.classList.add("hide")
+    highScoreContainerEl.classList.remove("show")
+    containerStartEl.classList.remove("hide")
+    containerStartEl.classList.add("show")
+    containerScoreEl.removeChild(containerScoreEl.lastChild)
+    QuestionIndex = 0
+    gameOver = ""
+    timerEl.textContent = 0 
+    score = 0
+
+    if (correctEl.className = "show") {
+        correctEl.classList.remove("show");
+        correctEl.classList.add("hide")
+    }
+    if (wrongEl.className = "show") {
+        wrongEl.classList.remove("show");
+        wrongEl.classList.add("hide");
+    }
+}
+
 
 var setTime = function () {
     timeleft = 30;
@@ -76,14 +99,14 @@ var timercheck = setInterval(function() {
     }
    
     if (timeleft < 0) {
-        //showScore()
+        showScore()
         timerEl.innerText = 0
         clearInterval(timercheck)
     }
 
     }, 1000)
 }
-
+// function that starts the game after startbtn is pressed
 var startGame = function() {
     containerStartEl.classList.add('hide');
     containerStartEl.classList.remove('show');
@@ -104,7 +127,7 @@ var resetAnswers = function() {
         answerButtonEl.removeChild(answerButtonEl.firstChild)
     };
 };
-
+// displays the questtions and answers
 var displayQuestion = function(index) {
     questionEl.innerText = index.q
     for (var i = 0; i < index.choices.length; i++) {
@@ -154,11 +177,11 @@ var displayQuestion = function(index) {
             setQuestion()
         }   
         else {
-           gameover = "true";
+           gameOver = "true";
            showScore();
             }
 }
-
+// shows the score I think.. hopefully
 var showScore = function () {
     containerQuestionEl.classList.add("hide");
     containerEndEl.classList.remove("hide");
@@ -169,4 +192,122 @@ var showScore = function () {
     containerScoreEl.appendChild(scoreDisplay);
 }       
 
+//create high score values
+ var createHighScore = function(event) { 
+    event.preventDefault() 
+    var initials = document.querySelector("#initials").value;
+    if (!initials) {
+        alert("Enter your intials!");
+        return;
+    }
+
+    formInitials.reset();
+    // my brain is hurting.... AHHHH
+    var HighScore = {
+    initials: initials,
+    score: score
+    } 
+    //pushes and sorts scores
+    HighScores.push(HighScore);
+    HighScores.sort((a, b) => {return b.score-a.score});
+
+    //clear list
+    while (highScoreListEl.firstChild) {
+        highScoreListEl.removeChild(highScoreListEl.firstChild)
+    }
+
+    //create elements in order of high scores
+    for (var i = 0; i < HighScores.length; i++) {
+        var highscoreEl = document.createElement("li");
+        highscoreEl.ClassName = "high-score";
+        highscoreEl.innerHTML = HighScores[i].initials + " - " + HighScores[i].score;
+        highScoreListEl.appendChild(highscoreEl);
+      }
+
+    saveHighScore();
+    displayHighScores();
+
+  }
+  //save high score
+  var saveHighScore = function () {
+      localStorage.setItem("HighScores", JSON.stringify(HighScores))
+          
+  }
+
+  //load values when page loads
+  var loadHighScore = function () {
+      var LoadedHighScores = localStorage.getItem("HighScores")
+          if (!LoadedHighScores) {
+          return false;
+      }
+
+      LoadedHighScores = JSON.parse(LoadedHighScores);
+      LoadedHighScores.sort((a, b) => {return b.score-a.score})
+
+
+      for (var i = 0; i < LoadedHighScores.length; i++) {
+          var highscoreEl = document.createElement("li");
+          highscoreEl.ClassName = "high-score";
+          highscoreEl.innerText = LoadedHighScores[i].initials + " - " + LoadedHighScores[i].score;
+          highScoreListEl.appendChild(highscoreEl);
+
+          HighScores.push(LoadedHighScores[i]);
+          
+      }
+  }  
+//display high score screen from link or when intiials entered
+var displayHighScores = function() {
+
+    highScoreContainerEl.classList.remove("hide");
+    highScoreContainerEl.classList.add("show");
+    gameOver = "true"
+
+    if (containerEndEl.className = "show") {
+        containerEndEl.classList.remove("show");
+        containerEndEl.classList.add("hide");
+        }
+    if (containerStartEl.className = "show") {
+        containerStartEl.classList.remove("show");
+        containerStartEl.classList.add("hide");
+        }
+        
+    if (containerQuestionEl.className = "show") {
+        containerQuestionEl.classList.remove("show");
+        containerQuestionEl.classList.add("hide");
+        }
+
+    if (correctEl.className = "show") {
+        correctEl.classList.remove("show");
+        correctEl.classList.add("hide");
+    }
+
+    if (wrongEl.className = "show") {
+        wrongEl.classList.remove("show");
+        wrongEl.classList.add("hide");
+        }
+    
+}
+//clears high scores
+var clearScores = function () {
+    HighScores = [];
+
+    while (highScoreListEl.firstChild) {
+        highScoreListEl.removeChild(highScoreListEl.firstChild);
+    }
+
+    localStorage.clear(HighScores);
+
+} 
+
+loadHighScore()
+
+// start button starts the game
 startBtn.addEventListener("click", startGame);
+//submit button
+formInitials.addEventListener("submit", createHighScore)
+//when view high-scores is clicked
+viewHighScoresEl.addEventListener("click", displayHighScores)
+//Go back button
+btnGoBackEl.addEventListener("click", renderStartPage)
+//clear scores button
+btnClearHighScoreEl.addEventListener("click", clearScores)
