@@ -1,6 +1,6 @@
 # WebsiteQuiz
 
-# Colton's Password Generator
+# Colton's JavaScript Quiz
 
 ## 
 
