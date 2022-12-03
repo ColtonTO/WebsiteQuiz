@@ -2,7 +2,7 @@
 
 # Colton's JavaScript Quiz
 
-## 
+## https://coltonto.github.io/WebsiteQuiz/ 
 
 ## Hello there, thanks for checking out this repository! Below you will find details of this JavaScript quiz.
 
