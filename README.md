@@ -1,5 +1,3 @@
-# WebsiteQuiz
-
 # Colton's JavaScript Quiz
 
 ## https://coltonto.github.io/WebsiteQuiz/ 
